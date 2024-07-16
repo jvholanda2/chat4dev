@@ -76,12 +76,24 @@ struct ChatView: View {
             messages.append(response)
         }
     }
+//    private func updateTextEditorHeight() {
+//        let charCount = newMessage.count
+//        let numLines = newMessage.split(separator: "\n").count
+//        var condition = (charCount > 30 || numLines > 1)
+//        textEditorHeight = condition ? 80 : 40  // Ajuste baseado em um número aproximado de caracteres
+//    }
     private func updateTextEditorHeight() {
-        let charCount = newMessage.count
         let numLines = newMessage.split(separator: "\n").count
-        var condition = if (charCount > 30 || numLines > 1) {true}
-        textEditorHeight = condition ? 80 : 40  // Ajuste baseado em um número aproximado de caracteres
+        let charCount = newMessage.count
+
+        // Verifica se o número de caracteres ou linhas ultrapassa os limites
+        if numLines > 1 || charCount > 30 {
+            textEditorHeight = 80  // Dobrar a altura
+        } else {
+            textEditorHeight = 40  // Altura padrão
+        }
     }
+
 
 
 //    private func updateTextEditorHeight() {
