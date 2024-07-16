@@ -7,64 +7,49 @@
 
 import SwiftUI
 
-struct Message: Identifiable {
-    let id = UUID()
-    let content: String
-    let isUser: Bool
-}
-
-
-struct ChatView2: View {
-    var body: some View {
-        
-        Text("oi")
-        //MessageRow(message: 01, "oi", true)
-    }
-}
-
-struct MessageRow: View {
-    let message: Message
-    
-    var body: some View {
-        HStack {
-            if message.isUser {
-                Spacer()
-                Text(message.content)
-                    .padding(10)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-            } else {
-                Text(message.content)
-                    .padding(10)
-                    .background(Color.gray.opacity(0.2))
-                    .foregroundColor(.black)
-                    .cornerRadius(10)
-                Spacer()
-            }
-        }
-        .padding(5)
-    }
-}
-
 struct ChatView: View {
     @State private var messages: [Message] = [
+        Message(content: "Olá! Como posso ajudar?", isUser: false),
+        Message(content: "Olá! Como posso ajudar?", isUser: true),
+        Message(content: "Olá! Como posso ajudar?", isUser: false),
+        Message(content: "Olá! Como posso ajudar?", isUser: true),
+        Message(content: "Olá! Como posso ajudar?", isUser: false),
         Message(content: "Olá! Como posso ajudar?", isUser: false)
     ]
     @State private var newMessage: String = ""
-    
+    @State private var textEditorHeight: CGFloat = 40
+    //let chatViewModel: ChatViewModel = ChatViewModel()
     var body: some View {
         VStack {
-            ScrollView {
-                ForEach(messages) { message in
-                    MessageRow(message: message)
+            ScrollViewReader { scrollViewProxy in
+                ScrollView {
+                    ForEach(messages) { message in
+                        MessageRow(message: message)
+                            .id(message.id)  // Atribui um ID exclusivo para cada mensagem
+                    }
+                }
+                .padding(.top)
+                .onChange(of: messages) { _ in
+                    // Rola para o final quando novas mensagens são adicionadas
+                    if let lastMessageID = messages.last?.id {
+                        scrollViewProxy.scrollTo(lastMessageID, anchor: .bottom)
+                    }
                 }
             }
-            .padding(.top)
             
             HStack {
-                TextField("Digite uma mensagem...", text: $newMessage)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                TextEditor(text: $newMessage)
+                    .frame(minHeight: textEditorHeight, maxHeight: textEditorHeight)
+                    .background(Color.gray.opacity(1))
+                    .cornerRadius(10)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.gray, lineWidth: 1)
+                    )
+                    .onChange(of: newMessage) { value in
+                       // chatViewModel.updateTextEditorHeight(newMessage: newMessage)
+                        updateTextEditorHeight()
+                    }
                 
                 Button(action: sendMessage) {
                     Text("Enviar")
@@ -83,6 +68,7 @@ struct ChatView: View {
         let message = Message(content: newMessage, isUser: true)
         messages.append(message)
         newMessage = ""
+        textEditorHeight = 40
         
         // Simulação de resposta automática
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -90,22 +76,38 @@ struct ChatView: View {
             messages.append(response)
         }
     }
+    private func updateTextEditorHeight() {
+        let charCount = newMessage.count
+        let numLines = newMessage.split(separator: "\n").count
+        var condition = if (charCount > 30 || numLines > 1) {true}
+        textEditorHeight = condition ? 80 : 40  // Ajuste baseado em um número aproximado de caracteres
+    }
+
+
+//    private func updateTextEditorHeight() {
+//        let maxLines: CGFloat = 4
+//        let lineHeight: CGFloat = UIFont.systemFont(ofSize: UIFont.systemFontSize).lineHeight
+//        let maxHeight = lineHeight * maxLines
+//        let currentHeight = newMessage.height(withConstrainedWidth: UIScreen.main.bounds.width * 0.7, font: UIFont.systemFont(ofSize: UIFont.systemFontSize))
+//        textEditorHeight = min(maxHeight, max(40, currentHeight + 20))
+//    }
 }
 
-struct ContentView2: View {
+extension String {
+    func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [.font: font], context: nil)
+        return boundingBox.height
+    }
+}
+
+
+struct ContentView: View {
     var body: some View {
         ChatView()
     }
 }
 
-@main
-struct ChatApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView2()
-        }
-    }
-}
 
 
 

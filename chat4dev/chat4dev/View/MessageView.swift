@@ -7,12 +7,34 @@
 
 import SwiftUI
 
-struct MessageView: View {
+struct MessageRow: View {
+    let message: Message
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            if message.isUser {
+                Spacer()
+                Text(message.content)
+                    .padding(10)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            } else {
+                Text(message.content)
+                    .padding(10)
+                    .background(Color.gray.opacity(0.2))
+                    .foregroundColor(.black)
+                    .cornerRadius(10)
+                Spacer()
+            }
+        }
+        .padding(5)
     }
 }
 
 #Preview {
-    MessageView()
+    
+
+    MessageRow(message: .init(content: "oi", isUser: true))
+    //MessageRow(message: .init(content: "oi", isUser: false))
 }

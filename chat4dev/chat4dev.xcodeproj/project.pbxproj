@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E6DA7942C469954007FF5A9 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6DA7932C469954007FF5A9 /* ChatView.swift */; };
+		4E6DA7972C46A053007FF5A9 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6DA7962C46A053007FF5A9 /* MessageView.swift */; };
+		4E6DA79B2C46AB0B007FF5A9 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6DA79A2C46AB0B007FF5A9 /* MessageViewModel.swift */; };
+		4E6DA79D2C46B210007FF5A9 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6DA79C2C46B210007FF5A9 /* ChatViewModel.swift */; };
 		4E7C23712C4570F4001B28CC /* chat4devApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7C23702C4570F4001B28CC /* chat4devApp.swift */; };
 		4E7C23732C4570F4001B28CC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7C23722C4570F4001B28CC /* ContentView.swift */; };
 		4E7C23752C4570F5001B28CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E7C23742C4570F5001B28CC /* Assets.xcassets */; };
@@ -36,6 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4E6DA7932C469954007FF5A9 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		4E6DA7962C46A053007FF5A9 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		4E6DA79A2C46AB0B007FF5A9 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
+		4E6DA79C2C46B210007FF5A9 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		4E7C236D2C4570F4001B28CC /* chat4dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chat4dev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E7C23702C4570F4001B28CC /* chat4devApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chat4devApp.swift; sourceTree = "<group>"; };
 		4E7C23722C4570F4001B28CC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -75,6 +83,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E6DA7952C46A024007FF5A9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4E6DA7932C469954007FF5A9 /* ChatView.swift */,
+				4E6DA7962C46A053007FF5A9 /* MessageView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4E6DA7982C46A5A8007FF5A9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4E6DA79A2C46AB0B007FF5A9 /* MessageViewModel.swift */,
+				4E6DA79C2C46B210007FF5A9 /* ChatViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		4E6DA7992C46A5B9007FF5A9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		4E7C23642C4570F4001B28CC = {
 			isa = PBXGroup;
 			children = (
@@ -98,10 +131,13 @@
 		4E7C236F2C4570F4001B28CC /* chat4dev */ = {
 			isa = PBXGroup;
 			children = (
-				4E7C23702C4570F4001B28CC /* chat4devApp.swift */,
+				4E6DA7992C46A5B9007FF5A9 /* Model */,
+				4E6DA7982C46A5A8007FF5A9 /* ViewModel */,
+				4E6DA7952C46A024007FF5A9 /* View */,
 				4E7C23722C4570F4001B28CC /* ContentView.swift */,
 				4E7C23742C4570F5001B28CC /* Assets.xcassets */,
 				4E7C23792C4570F5001B28CC /* Persistence.swift */,
+				4E7C23702C4570F4001B28CC /* chat4devApp.swift */,
 				4E7C237B2C4570F5001B28CC /* chat4dev.xcdatamodeld */,
 				4E7C23762C4570F5001B28CC /* Preview Content */,
 			);
@@ -263,8 +299,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E6DA7972C46A053007FF5A9 /* MessageView.swift in Sources */,
 				4E7C237D2C4570F5001B28CC /* chat4dev.xcdatamodeld in Sources */,
+				4E6DA79D2C46B210007FF5A9 /* ChatViewModel.swift in Sources */,
 				4E7C237A2C4570F5001B28CC /* Persistence.swift in Sources */,
+				4E6DA7942C469954007FF5A9 /* ChatView.swift in Sources */,
+				4E6DA79B2C46AB0B007FF5A9 /* MessageViewModel.swift in Sources */,
 				4E7C23732C4570F4001B28CC /* ContentView.swift in Sources */,
 				4E7C23712C4570F4001B28CC /* chat4devApp.swift in Sources */,
 			);
