@@ -6,20 +6,35 @@
 //
 
 import Foundation
-import UIKit
+import SwiftUI
 
 class ChatViewModel: ObservableObject {
-    func updateTextEditorHeight(newMessage: String) {
-        var charCount = newMessage.count
-        var textEditorHeight = charCount > 25 ? 80 : 40  // Ajuste baseado em um número aproximado de caracteres
-    }
-
+    @Published var messages: [Message] = [
+        Message(content: "Olá! Como posso ajudar?", isUser: false, timestamp: Date()),
+    ]
+    @Published var newMessage: String = ""
+    @Published var textEditorHeight: CGFloat = 40
     
-//    extension String {
-//        func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
-//            let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
-//            let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [.font: font], context: nil)
-//            return boundingBox.height
-//        }
-//    }
+    func sendMessage() {
+        guard !newMessage.isEmpty else { return }
+        let message = Message(content: newMessage, isUser: true, timestamp: Date())
+        messages.append(message)
+        newMessage = ""
+        textEditorHeight = 40
+        
+        // Simulação de resposta automática
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            let response = Message(content: "Esta é uma resposta automática.", isUser: false, timestamp: Date())
+            self.messages.append(response)
+        }
+    }
+    
+    
+    func updateTextEditorHeight() {
+        let numLines = newMessage.split(whereSeparator: \.isNewline).count
+        let charCount = newMessage.count
+
+        textEditorHeight = (numLines > 1 || charCount > 30) ? 80 : 40
+    }
 }
+

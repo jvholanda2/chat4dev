@@ -8,15 +8,21 @@
 import SwiftUI
 
 struct TabBarView: View {
+    @Binding var isLoggedIn: Bool
     var body: some View {
-        TabView<<#SelectionValue: Hashable#>, <#Content: View#>>
-            ChatView()
-            OnlyTestView()
-        
+        TabView {
+            ListChatsView()
+                .tabItem {
+                    Label("Chat", systemImage: "character.bubble.fill")
+                }
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gear")
+                }
+        }
     }
-
 }
 
 #Preview {
-    TabBarView()
+    TabBarView(isLoggedIn: .constant(true))
 }

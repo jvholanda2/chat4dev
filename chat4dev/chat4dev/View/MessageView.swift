@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MessageRow: View {
+struct MessageView: View {
     let message: Message
     
     var body: some View {
@@ -19,12 +19,19 @@ struct MessageRow: View {
                     .background(Color.blue)
                     .foregroundColor(.white)
                     .cornerRadius(10)
+                Text(formatDate(message.timestamp))
+                    .font(.footnote)
+                    .foregroundColor(.gray)
+                
             } else {
                 Text(message.content)
                     .padding(10)
                     .background(Color.gray.opacity(0.2))
                     .foregroundColor(.black)
                     .cornerRadius(10)
+                Text(formatDate(message.timestamp))
+                    .font(.footnote)
+                    .foregroundColor(.gray)
                 Spacer()
             }
         }
@@ -32,9 +39,14 @@ struct MessageRow: View {
     }
 }
 
+private func formatDate(_ date: Date) -> String {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "HH:mm"
+    return formatter.string(from: date)
+}
 #Preview {
     
 
-    MessageRow(message: .init(content: "oi", isUser: true))
+    MessageView(message: .init(content: "oi", isUser: true, timestamp: Date()))
     //MessageRow(message: .init(content: "oi", isUser: false))
 }

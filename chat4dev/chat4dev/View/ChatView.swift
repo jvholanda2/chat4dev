@@ -8,50 +8,38 @@
 import SwiftUI
 
 struct ChatView: View {
-    @State private var messages: [Message] = [
-        Message(content: "Olá! Como posso ajudar?", isUser: false),
-        Message(content: "Olá! Como posso ajudar?", isUser: true),
-        Message(content: "Olá! Como posso ajudar?", isUser: false),
-        Message(content: "Olá! Como posso ajudar?", isUser: true),
-        Message(content: "Olá! Como posso ajudar?", isUser: false),
-        Message(content: "Olá! Como posso ajudar?", isUser: false)
-    ]
-    @State private var newMessage: String = ""
-    @State private var textEditorHeight: CGFloat = 40
-    //let chatViewModel: ChatViewModel = ChatViewModel()
+    @ObservedObject var chatViewModel = ChatViewModel()
     var body: some View {
         VStack {
             ScrollViewReader { scrollViewProxy in
                 ScrollView {
-                    ForEach(messages) { message in
-                        MessageRow(message: message)
+                    ForEach(chatViewModel.messages) { message in
+                        MessageView(message: message)
                             .id(message.id)  // Atribui um ID exclusivo para cada mensagem
                     }
                 }
                 .padding(.top)
-                .onChange(of: messages) { _ in
+                .onChange(of: chatViewModel.messages) { _ , _ in
                     // Rola para o final quando novas mensagens são adicionadas
-                    if let lastMessageID = messages.last?.id {
+                    if let lastMessageID = chatViewModel.messages.last?.id {
                         scrollViewProxy.scrollTo(lastMessageID, anchor: .bottom)
                     }
                 }
             }
-            
             HStack {
-                TextEditor(text: $newMessage)
-                    .frame(minHeight: textEditorHeight, maxHeight: textEditorHeight)
+                TextEditor(text: $chatViewModel.newMessage)
+                    .frame(minHeight: chatViewModel.textEditorHeight, maxHeight: chatViewModel.textEditorHeight)
                     .background(Color.gray.opacity(1))
                     .cornerRadius(10)
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(Color.gray, lineWidth: 1)
                     )
-                    .onChange(of: newMessage) { value in
-                       // chatViewModel.updateTextEditorHeight(newMessage: newMessage)
-                        updateTextEditorHeight()
+                    .onChange(of: chatViewModel.newMessage) { _ , _ in
+                        chatViewModel.updateTextEditorHeight()
                     }
                 
-                Button(action: sendMessage) {
+                Button(action: chatViewModel.sendMessage) {
                     Text("Enviar")
                         .padding(10)
                         .background(Color.blue)
@@ -60,59 +48,9 @@ struct ChatView: View {
                 }
             }
             .padding()
-        }
-    }
-    
-    private func sendMessage() {
-        guard !newMessage.isEmpty else { return }
-        let message = Message(content: newMessage, isUser: true)
-        messages.append(message)
-        newMessage = ""
-        textEditorHeight = 40
-        
-        // Simulação de resposta automática
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            let response = Message(content: "Esta é uma resposta automática.", isUser: false)
-            messages.append(response)
-        }
-    }
-//    private func updateTextEditorHeight() {
-//        let charCount = newMessage.count
-//        let numLines = newMessage.split(separator: "\n").count
-//        var condition = (charCount > 30 || numLines > 1)
-//        textEditorHeight = condition ? 80 : 40  // Ajuste baseado em um número aproximado de caracteres
-//    }
-    private func updateTextEditorHeight() {
-        let numLines = newMessage.split(separator: "\n").count
-        let charCount = newMessage.count
-
-        // Verifica se o número de caracteres ou linhas ultrapassa os limites
-        if numLines > 1 || charCount > 30 {
-            textEditorHeight = 80  // Dobrar a altura
-        } else {
-            textEditorHeight = 40  // Altura padrão
-        }
-    }
-
-
-
-//    private func updateTextEditorHeight() {
-//        let maxLines: CGFloat = 4
-//        let lineHeight: CGFloat = UIFont.systemFont(ofSize: UIFont.systemFontSize).lineHeight
-//        let maxHeight = lineHeight * maxLines
-//        let currentHeight = newMessage.height(withConstrainedWidth: UIScreen.main.bounds.width * 0.7, font: UIFont.systemFont(ofSize: UIFont.systemFontSize))
-//        textEditorHeight = min(maxHeight, max(40, currentHeight + 20))
-//    }
-}
-
-extension String {
-    func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
-        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
-        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [.font: font], context: nil)
-        return boundingBox.height
+        } .navigationTitle("Chat Theme")
     }
 }
-
 
 struct ContentView: View {
     var body: some View {

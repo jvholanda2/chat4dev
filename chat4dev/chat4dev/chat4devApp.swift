@@ -13,7 +13,7 @@ struct chat4devApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            InitialFluxView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

@@ -21,6 +21,7 @@ struct ContentView2: View {
             List {
                 ForEach(items) { item in
                     NavigationLink {
+                        ChatView()
                         Text("Item at \(item.timestamp!, formatter: itemFormatter)")
                     } label: {
                         Text(item.timestamp!, formatter: itemFormatter)
@@ -29,12 +30,12 @@ struct ContentView2: View {
                 .onDelete(perform: deleteItems)
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    EditButton()
+//                }
                 ToolbarItem {
                     Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                        Label("Novo Chat", systemImage: "plus.bubble.fill")
                     }
                 }
             }

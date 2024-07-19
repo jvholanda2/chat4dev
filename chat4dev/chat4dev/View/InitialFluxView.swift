@@ -8,11 +8,24 @@
 import SwiftUI
 
 struct InitialFluxView: View {
+    @State var path: NavigationPath = .init()
+    @State var isLoggedIn: Bool = false
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack(path: $path) {
+            if isLoggedIn {
+                TabBarView(isLoggedIn: $isLoggedIn)
+            } else {
+                LogginView(isLoggedIn: $isLoggedIn)
+            }
+        }
     }
 }
 
 #Preview {
     InitialFluxView()
 }
+
+
+import SwiftUI
+
+

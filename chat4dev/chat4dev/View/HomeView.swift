@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct HomeView: View {
+    @Binding var isLoggedIn: Bool
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+        Text("HomeView")
+            NavigationLink(destination: ChatView()) {
+                Text("Novo Chat")
+            }
+            .navigationTitle("Home")
+        }
     }
 }
 
 #Preview {
-    HomeView()
+    HomeView(isLoggedIn: .constant(true))
 }
