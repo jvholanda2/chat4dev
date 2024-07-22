@@ -30,6 +30,8 @@
 		4EBB3A632C47FCE50038CEAC /* OnlyTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBB3A622C47FCE50038CEAC /* OnlyTestView.swift */; };
 		4EBB3A652C47FFBC0038CEAC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBB3A642C47FFBC0038CEAC /* HomeView.swift */; };
 		4EBB3A672C4802520038CEAC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBB3A662C4802520038CEAC /* SettingsView.swift */; };
+		4ED7A5622C4E88FF00D9DFBC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED7A5612C4E88FF00D9DFBC /* LoginView.swift */; };
+		4ED7A5642C4E91B000D9DFBC /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED7A5632C4E91B000D9DFBC /* LoginCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +78,8 @@
 		4EBB3A622C47FCE50038CEAC /* OnlyTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyTestView.swift; sourceTree = "<group>"; };
 		4EBB3A642C47FFBC0038CEAC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		4EBB3A662C4802520038CEAC /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		4ED7A5612C4E88FF00D9DFBC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		4ED7A5632C4E91B000D9DFBC /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +120,7 @@
 				4EBB3A662C4802520038CEAC /* SettingsView.swift */,
 				4E9B59F12C49448D0064CD84 /* ListChatsView.swift */,
 				4E9B59F32C494EDB0064CD84 /* ChatIsEmptyView.swift */,
+				4ED7A5612C4E88FF00D9DFBC /* LoginView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -160,6 +165,8 @@
 		4E7C236F2C4570F4001B28CC /* chat4dev */ = {
 			isa = PBXGroup;
 			children = (
+				4ED7A5602C4E7A5A00D9DFBC /* Protocol */,
+				4ED7A55D2C4E756B00D9DFBC /* Coordinator */,
 				4E6DA7992C46A5B9007FF5A9 /* Model */,
 				4E6DA7982C46A5A8007FF5A9 /* ViewModel */,
 				4E6DA7952C46A024007FF5A9 /* View */,
@@ -169,7 +176,6 @@
 				4E7C23702C4570F4001B28CC /* chat4devApp.swift */,
 				4E7C237B2C4570F5001B28CC /* chat4dev.xcdatamodeld */,
 				4E7C23762C4570F5001B28CC /* Preview Content */,
-				4EBB3A5C2C47F7080038CEAC /* Coordinator.swift */,
 			);
 			path = chat4dev;
 			sourceTree = "<group>";
@@ -197,6 +203,22 @@
 				4E7C23922C4570F5001B28CC /* chat4devUITestsLaunchTests.swift */,
 			);
 			path = chat4devUITests;
+			sourceTree = "<group>";
+		};
+		4ED7A55D2C4E756B00D9DFBC /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				4ED7A5632C4E91B000D9DFBC /* LoginCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		4ED7A5602C4E7A5A00D9DFBC /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				4EBB3A5C2C47F7080038CEAC /* Coordinator.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -341,10 +363,12 @@
 				4E9B59F22C49448D0064CD84 /* ListChatsView.swift in Sources */,
 				4EBB3A672C4802520038CEAC /* SettingsView.swift in Sources */,
 				4EBB3A632C47FCE50038CEAC /* OnlyTestView.swift in Sources */,
+				4ED7A5642C4E91B000D9DFBC /* LoginCoordinator.swift in Sources */,
 				4E9B59F62C495E260064CD84 /* ListChatViewModel.swift in Sources */,
 				4E7C237A2C4570F5001B28CC /* Persistence.swift in Sources */,
 				4E6DA7942C469954007FF5A9 /* ChatView.swift in Sources */,
 				4E6DA79B2C46AB0B007FF5A9 /* Message.swift in Sources */,
+				4ED7A5622C4E88FF00D9DFBC /* LoginView.swift in Sources */,
 				4E7C23732C4570F4001B28CC /* ContentView.swift in Sources */,
 				4E7C23712C4570F4001B28CC /* chat4devApp.swift in Sources */,
 			);

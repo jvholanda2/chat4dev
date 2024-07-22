@@ -9,11 +9,12 @@ import SwiftUI
 
 @main
 struct chat4devApp: App {
+    @StateObject var coordinator = LoginCoordinator()
     let persistenceController = PersistenceController.shared
-
+    
     var body: some Scene {
         WindowGroup {
-            InitialFluxView()
+            InitialFluxView(coordinator: coordinator)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

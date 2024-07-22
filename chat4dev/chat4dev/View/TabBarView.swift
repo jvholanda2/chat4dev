@@ -9,13 +9,14 @@ import SwiftUI
 
 struct TabBarView: View {
     @Binding var isLoggedIn: Bool
+    @ObservedObject var coordinator: LoginCoordinator
     var body: some View {
         TabView {
-            ListChatsView()
+            ListChatsView(coordinator: coordinator)
                 .tabItem {
                     Label("Chat", systemImage: "character.bubble.fill")
                 }
-            SettingsView()
+            SettingsView(coordinator: coordinator)
                 .tabItem {
                     Label("Settings", systemImage: "gear")
                 }
@@ -24,5 +25,5 @@ struct TabBarView: View {
 }
 
 #Preview {
-    TabBarView(isLoggedIn: .constant(true))
+    TabBarView(isLoggedIn: .constant(true), coordinator: .init())
 }
