@@ -28,7 +28,7 @@ struct SettingsView: View {
             }
             Spacer()
             Button("Sing Out") {
-                coordinator.push(LoginCoordinator.Coordinates.signOut)
+                coordinator.popToRoot()
             }
         }.padding()
     }

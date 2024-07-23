@@ -7,10 +7,10 @@ struct LoginView: View {
         NavigationStack(path: $coordinator.path) {
             VStack {
                 Button("SignIn") {
-                    coordinator.push(LoginCoordinator.Coordinates.signIn)
+                    coordinator.push(LoginCoordinator.Coordinates.signInn)
                 }
                 Button("SignOut") {
-                    coordinator.push(LoginCoordinator.Coordinates.signOut)
+                    coordinator.push(LoginCoordinator.Coordinates.signOutt)
                 }
             }
             .navigationTitle("Coord")

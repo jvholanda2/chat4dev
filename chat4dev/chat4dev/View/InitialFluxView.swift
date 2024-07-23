@@ -13,19 +13,21 @@ struct InitialFluxView: View {
     @ObservedObject var coordinator: LoginCoordinator
     var body: some View {
         NavigationStack(path: $coordinator.path) {
-            if isLoggedIn {
-                TabBarView(isLoggedIn: $isLoggedIn, coordinator: coordinator)
-            } else {
-                LogginView(isLoggedIn: $isLoggedIn)
-            }
-        }.navigationDestination(for: LoginCoordinator.Coordinates.self) { coordinate in
-            switch coordinate {
-            case .signIn:
-                TabBarView(isLoggedIn: $isLoggedIn, coordinator: coordinator)
-            case .signOut:
-                LogginView(isLoggedIn: $isLoggedIn)
-            case .chat:
-                ChatView()
+            VStack {
+                if isLoggedIn {
+                    TabBarView(isLoggedIn: $isLoggedIn, coordinator: coordinator)
+                } else {
+                    LogginView(isLoggedIn: $isLoggedIn, coordinator: coordinator)
+                }
+            }.navigationDestination(for: LoginCoordinator.Coordinates.self) { coordinate in
+                switch coordinate {
+                case .signInn:
+                    TabBarView(isLoggedIn: $isLoggedIn, coordinator: coordinator)
+                case .signOutt:
+                    LogginView(isLoggedIn: $isLoggedIn, coordinator: coordinator)
+                case .chat:
+                    ChatView()
+                }
             }
         }
     }
