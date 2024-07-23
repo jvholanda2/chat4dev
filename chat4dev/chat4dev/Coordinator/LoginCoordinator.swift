@@ -37,9 +37,9 @@ class LoginCoordinator: Coordinator {
 
 extension LoginCoordinator {
     enum Coordinates: String, Hashable {
-        case signInn
+        case signIn
         case chat
-        case signOutt
+        case signOut
     }
 }
 

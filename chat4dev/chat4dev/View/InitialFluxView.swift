@@ -21,9 +21,9 @@ struct InitialFluxView: View {
                 }
             }.navigationDestination(for: LoginCoordinator.Coordinates.self) { coordinate in
                 switch coordinate {
-                case .signInn:
+                case .signIn:
                     TabBarView(isLoggedIn: $isLoggedIn, coordinator: coordinator)
-                case .signOutt:
+                case .signOut:
                     LogginView(isLoggedIn: $isLoggedIn, coordinator: coordinator)
                 case .chat:
                     ChatView()
