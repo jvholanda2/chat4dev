@@ -10,6 +10,7 @@ import SwiftUI
 struct SettingsView: View {
     @AppStorage("LightModeDarkMode") var lightOnDarkOff: Bool = true
     @AppStorage("Notifications") var notifications: Bool = true
+    @ObservedObject var coordinator: LoginCoordinator
     var body: some View {
         VStack {
             Text("Settings").font(.title)
@@ -26,12 +27,15 @@ struct SettingsView: View {
                 Text(lightOnDarkOff ? "Ótimo dia! 😎" : "Luzes desligadas pessoal... 😴")
             }
             Spacer()
+            Button("Sing Out") {
+                coordinator.popToRoot()
+            }
         }.padding()
     }
 }
     
 #Preview {
-    SettingsView()
+    SettingsView(coordinator: .init())
 }
 
 

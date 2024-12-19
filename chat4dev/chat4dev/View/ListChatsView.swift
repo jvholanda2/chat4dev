@@ -162,7 +162,7 @@ struct ListChatsView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
-    
+    @ObservedObject var coordinator: LoginCoordinator
     @State private var newChatItemID: NSManagedObjectID?
     var chatIsEmpty: Bool = false
 
@@ -240,10 +240,10 @@ private let itemFormatter: DateFormatter = {
 }()
 
 #Preview {
-    ListChatsView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    ListChatsView(coordinator: .init()).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }
 
 
-#Preview {
-    ListChatsView()
-}
+//#Preview {
+//    ListChatsView()
+//}

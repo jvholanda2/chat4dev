@@ -8,24 +8,36 @@
 import SwiftUI
 
 struct InitialFluxView: View {
-    @State var path: NavigationPath = .init()
+    //@State var path: NavigationPath = .init()
     @State var isLoggedIn: Bool = false
+    @ObservedObject var coordinator: LoginCoordinator
     var body: some View {
-        NavigationStack(path: $path) {
-            if isLoggedIn {
-                TabBarView(isLoggedIn: $isLoggedIn)
-            } else {
-                LogginView(isLoggedIn: $isLoggedIn)
+        NavigationStack(path: $coordinator.path) {
+            VStack {
+                if isLoggedIn {
+                    TabBarView(isLoggedIn: $isLoggedIn, coordinator: coordinator)
+                } else {
+                    LogginView(isLoggedIn: $isLoggedIn, coordinator: coordinator)
+                }
+            }.navigationDestination(for: LoginCoordinator.Coordinates.self) { coordinate in
+                switch coordinate {
+                case .signIn:
+                    TabBarView(isLoggedIn: $isLoggedIn, coordinator: coordinator)
+                case .signOut:
+                    LogginView(isLoggedIn: $isLoggedIn, coordinator: coordinator)
+                case .chat:
+                    ChatView()
+                }
             }
         }
     }
 }
 
 #Preview {
-    InitialFluxView()
+    InitialFluxView(coordinator: LoginCoordinator())
 }
 
 
-import SwiftUI
+
 
 
